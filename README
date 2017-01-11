@@ -1,0 +1,15 @@
+This project has three stand-alone parts.
+
+1. TwitterTweets: This part fetches the tweets from twitter and publishes those tweets on a kafka topic 'x' by adding hashtag with tweetmessage. 
+2. SentimentAnalyzer: This fetches the messages from topic 'x', analyzes those messages, and publishes new message containing the sentiment along with the hashtag and 
+ origianl tweet on kafka topic 'y'
+3. Visualizer: This fetches the messages from topic 'y' and performs the aggregation and inserts it into java hashmap. 
+
+
+Commands to run it from commandline.
+
+
+mvn clean install
+java -cp target/twitterSentiment-0.0.1-SNAPSHOT-jar-with-dependencies.jar edu.sjsu.cs185c.Visualizer visualizer01
+java -cp target/twitterSentiment-0.0.1-SNAPSHOT-jar-with-dependencies.jar edu.sjsu.cs185c.SentimentAnalyzer sentiment01 visualizer01
+java -cp target/twitterSentiment-0.0.1-SNAPSHOT-jar-with-dependencies.jar edu.sjsu.cs185c.TwitterTweets good sentiment01
